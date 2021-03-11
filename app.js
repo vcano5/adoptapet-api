@@ -13,9 +13,14 @@ app.use(bodyParser.json());
 /*********************** Mongoose Configuration *******************************/
 const mongoose = require("mongoose");
 
-mongoose.connect(
-  "mongodb+srv://introadb:introadb1234@cluster0.icmzp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-);
+var isProduction = process.env.NODE_ENV === 'production';
+
+mongoose.connect(process.env.MONGODB_URI,
+  {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useCreateIndex: true
+  });
 
 mongoose.set("debug", true);
 
